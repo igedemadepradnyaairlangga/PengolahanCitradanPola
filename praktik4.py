@@ -1,12 +1,11 @@
-#memanggil library yang dibutuhkan
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
-
-img = cv2.imread("banteng.jpg") 
-color = ('b','g','r')
-for i,col in enumerate(color):
-  histr = cv2.calcHist([img],[i],None,[256],[0,256])
-  plt.plot(histr,color = col)
-  plt.xlim([0,256])
+img = cv2.imread('test.jpeg')
+kernel = np.ones((5,5),np.uint8)
+closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
+plt.subplot(121),plt.imshow(img),plt.title('Original')
+plt.xticks([]), plt.yticks([])
+plt.subplot(122),plt.imshow(closing),plt.title('Closing')
+plt.xticks([]), plt.yticks([])
 plt.show()
